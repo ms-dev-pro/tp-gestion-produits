@@ -1,6 +1,9 @@
 # GESTION PRODUITS
 
 ## Prérequis
+Ajouter dans le fichier host `127.0.0.1 seb.local`
+Lancer les conteneurs avec la commande `docker-compose up`
+
 Cette application est compatible `PHP5` et a été testée avec une base de données `MySQL 5.7`.
 
 ## Installation
