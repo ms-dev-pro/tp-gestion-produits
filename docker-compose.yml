@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: gestion_produits
+    volumes:
+      - ./database/:/docker-entrypoint-initdb.d
+  nginx:
+    build: data/nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./www:/workdir
+      - ./data/nginx/conf/site.conf:/etc/nginx/conf.d/site.conf
+      - ./data/nginx/conf/nginx.conf:/etc/nginx/nginx.conf
+    links:
+      - php
+  php:
+    build: data/php
+    links:
+      - db
+    volumes:
+      - ./www:/workdir
