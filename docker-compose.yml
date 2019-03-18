@@ -22,6 +22,8 @@ services:
     image: minio/minio
     ports:
       - "9001:9000"
+    volumes:
+      - ./miniodb:/export
     environment:
       MINIO_ACCESS_KEY: FN1E9STQYQ9LE077SNWC
       MINIO_SECRET_KEY: ThgAalM0ljoXhRHenaXdjxHHvT596706gS0Reuiv
@@ -31,5 +33,7 @@ services:
     build: data/php
     links:
       - db
+      - minio
+
     volumes:
       - ./www:/workdir
