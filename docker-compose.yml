@@ -8,6 +8,8 @@ services:
       MYSQL_DATABASE: gestion_produits
     volumes:
       - ./database/:/docker-entrypoint-initdb.d
+      - mysql_database:/var/lib/mysql
+
   nginx:
     build: data/nginx
     ports:
@@ -23,7 +25,7 @@ services:
     ports:
       - "9001:9000"
     volumes:
-      - ./miniodb:/export
+      - miniodb:/export
     environment:
       MINIO_ACCESS_KEY: FN1E9STQYQ9LE077SNWC
       MINIO_SECRET_KEY: ThgAalM0ljoXhRHenaXdjxHHvT596706gS0Reuiv
@@ -37,3 +39,6 @@ services:
 
     volumes:
       - ./www:/workdir
+volumes:
+  mysql_database:
+  miniodb:
