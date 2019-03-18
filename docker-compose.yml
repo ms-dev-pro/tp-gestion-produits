@@ -18,6 +18,15 @@ services:
       - ./data/nginx/conf/nginx.conf:/etc/nginx/nginx.conf
     links:
       - php
+  minio:
+    image: minio/minio
+    ports:
+      - "9001:9000"
+    environment:
+      MINIO_ACCESS_KEY: FN1E9STQYQ9LE077SNWC
+      MINIO_SECRET_KEY: ThgAalM0ljoXhRHenaXdjxHHvT596706gS0Reuiv
+    command: server /export
+
   php:
     build: data/php
     links:
