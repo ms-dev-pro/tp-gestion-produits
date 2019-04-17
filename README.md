@@ -6,8 +6,10 @@ Ajouter dans le fichier host `127.0.0.1 seb.local`
 Lancer les conteneurs avec la commande `docker-compose up`
 
 _______________________________________________________________
+```diff
++ Pour lancer les conteneurs en mode SWARM : 
+```
 
-Pour lancer les conteneurs en mode SWARM : 
 
 Il faut tout d'abord initialiser le swarm :
 
