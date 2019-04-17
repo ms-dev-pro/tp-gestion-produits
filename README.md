@@ -33,9 +33,11 @@ docker stack deploy --compose-file docker-compose.yml mydockerstack
 ```
 
 Les services sont tous configurés pour avoir 2 instances, sauf la base de données :
-	- En effet, je n'ai pas trouvé le moyen de contourner le problème suivant:
-		- Quand le lance une instance MySQL celle-ci verrouille des fichiers comme ibdata1 auquel la seconde instance ne peut pas accéder et n'arrive donc pas à démarrer.
 
+- En effet, je n'ai pas trouvé le moyen de contourner le problème suivant:
+	
+- Quand le lance une instance MySQL celle-ci verrouille des fichiers comme ibdata1 auquel la seconde instance ne peut pas accéder et n'arrive donc pas à démarrer.
+		
 Pour supprimer le registry:
 
 ```bash
