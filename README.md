@@ -2,6 +2,7 @@
 
 ## Prérequis
 Ajouter dans le fichier host `127.0.0.1 seb.local`
+
 Lancer les conteneurs avec la commande `docker-compose up`
 
 _______________________________________________________________
