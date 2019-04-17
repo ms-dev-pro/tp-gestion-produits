@@ -4,6 +4,61 @@
 Ajouter dans le fichier host `127.0.0.1 seb.local`
 Lancer les conteneurs avec la commande `docker-compose up`
 
+_______________________________________________________________
+
+Pour lancer les conteneurs en mode SWARM : 
+
+Il faut tout d'abord initialiser le swarm :
+
+```bash
+docker swarm init
+```
+Il faut ensuite créer un registry en local :
+
+```bash
+docker service create --name registry --publish published=5000,target=5000 registry:2
+```
+
+Il suffit ensuite de push les images sur le registry:
+
+```bash
+docker-compose push
+```
+
+
+Enfin on peut lancer le déploiement:
+
+```bash
+docker stack deploy --compose-file docker-compose.yml mydockerstack
+```
+
+Les services sont tous configurés pour avoir 2 instances, sauf la base de données :
+	- En effet, je n'ai pas trouvé le moyen de contourner le problème suivant:
+		- Quand le lance une instance MySQL celle-ci verrouille des fichiers comme ibdata1 auquel la seconde instance ne peut pas accéder et n'arrive donc pas à démarrer.
+
+Pour supprimer le registry:
+
+```bash
+docker service rm registry
+```
+
+Pour supprimer le stack:
+
+```bash
+docker stack rm mydockerstack
+```
+
+
+Pour quitter le swarm:
+
+```bash
+docker swarm leave --force
+```
+
+
+
+
+
 Cette application est compatible `PHP5` et a été testée avec une base de données `MySQL 5.7`.
 
 ## Installation
