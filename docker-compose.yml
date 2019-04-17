@@ -1,4 +1,4 @@
-version: '3'
+version: '3.2'
 
 services:
   db:
@@ -9,9 +9,18 @@ services:
     volumes:
       - ./database/:/docker-entrypoint-initdb.d
       - mysql_database:/var/lib/mysql
+    # Pas réussi à faire fonctionner multiples intances mysql,
+    # erreur d'accès aux fichiers ibdata1 locké par l'autre instance
+    #deploy:
+    #  mode: replicated
+    #  replicas: 2
+    #  endpoint_mode: dnsrr
 
   nginx:
+    image: 127.0.0.1:5000/nginx_stack
     build: data/nginx
+    deploy:
+      replicas: 2
     ports:
       - "80:80"
     volumes:
@@ -22,6 +31,8 @@ services:
       - php
   minio:
     image: minio/minio
+    deploy:
+      replicas: 2
     ports:
       - "9001:9000"
     volumes:
@@ -32,9 +43,14 @@ services:
     command: server /export
 
   redis:
+    deploy:
+      replicas: 2
     image: redis:alpine
 
   php:
+    deploy:
+      replicas: 2
+    image: 127.0.0.1:5000/php_stack
     build: data/php
     depends_on:
       - db
